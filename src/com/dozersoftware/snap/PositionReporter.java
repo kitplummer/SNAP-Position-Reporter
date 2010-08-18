@@ -27,7 +27,7 @@ public class PositionReporter extends AbstractActionLifecycle {
 		} catch (MessageDeliverException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Kicking a PositionReport!");
+		//System.out.println("Kicking a PositionReport!");
 		return message;
 	}
 	

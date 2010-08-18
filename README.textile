@@ -1,0 +1,1 @@
+This is a simple JBossESB service that pushes out mock/sim'd location messages to the NormProcessor.

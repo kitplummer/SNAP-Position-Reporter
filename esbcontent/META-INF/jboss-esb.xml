@@ -6,25 +6,34 @@
 	<providers>
 		<schedule-provider name="scheduler">
 			<simple-schedule scheduleid="2-sec-trigger"
-				frequency="5" execCount="10" />
+				frequency="5" execCount="1000" />
 		</schedule-provider>
 
 	</providers>
 
 	<services>
 		<service category="SNAP" description="Simple GPS Generator"
-			name="PositionMessageComposer">
+			invmScope="GLOBAL" name="PositionMessageComposer">
 			<listeners>
 				<scheduled-listener name="my_scheduled_listener"
-					scheduleidref="2-sec-trigger" event-processor="com.dozersoftware.snap.PositionMessageComposer" >
-					<property name="handle" value="SYSTEMX"/>
-					</scheduled-listener>
+					scheduleidref="2-sec-trigger" event-processor="com.dozersoftware.snap.PositionMessageComposer">
+					<property name="handle" value="SYSTEMX" />
+				</scheduled-listener>
 			</listeners>
 			<actions mep="OneWay">
 				<action name="start-reporting" class="com.dozersoftware.snap.PositionReporter">
 					<property name="exceptionMethod" value="exceptionHandler" />
 				</action>
+				<action class="org.jboss.soa.esb.actions.Notifier" name="notificationAction">
+					<property name="okMethod" value="notifyOK" />
+					<property name="destinations">
+						<NotificationList type="ok">
+							<target class="NotifyConsole" />
+						</NotificationList>
+					</property>
+				</action>
 			</actions>
+
 		</service>
 	</services>
 </jbossesb>
