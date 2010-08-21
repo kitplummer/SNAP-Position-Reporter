@@ -23,7 +23,7 @@ public class PositionReporter extends AbstractActionLifecycle {
 	public Message process(Message message) {
 		
 		try {
-			new ServiceInvoker("Norm", "NormProcessor").deliverAsync(message);
+			new ServiceInvoker("NormOut", "NormProcessor").deliverAsync(message);
 		} catch (MessageDeliverException e) {
 			e.printStackTrace();
 		}
