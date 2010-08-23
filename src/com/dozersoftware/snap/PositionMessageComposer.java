@@ -84,9 +84,9 @@ public class PositionMessageComposer implements ScheduledEventMessageComposer {
 	private String format(){
 		Date date = new Date();
 		String body = "<BODY>{\"POSREP\": {\"count\":" + count + ", \"time\": ";
-		body = body + DateFormat.getDateTimeInstance().format(date) + ",\"lat\":";
-		body = body + Double.toString(curLat) + ",";
-		body = body + "\"lng\":" + Double.toString((curLng)) + "}}";
+		body = body + "\"" + DateFormat.getDateTimeInstance().format(date) + "\",\"lat\":";
+		body = body + "\"" + Double.toString(curLat) + "\",";
+		body = body + "\"lng\":\"" + Double.toString((curLng)) + "\"}}";
 		body = body + "</BODY>";
 		
 		return body;

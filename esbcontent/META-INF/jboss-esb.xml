@@ -17,23 +17,13 @@
 			<listeners>
 				<scheduled-listener name="my_scheduled_listener"
 					scheduleidref="2-sec-trigger" event-processor="com.dozersoftware.snap.PositionMessageComposer">
-					<property name="handle" value="SYSTEMX" />
 				</scheduled-listener>
 			</listeners>
 			<actions mep="OneWay">
 				<action name="start-reporting" class="com.dozersoftware.snap.PositionReporter">
 					<property name="exceptionMethod" value="exceptionHandler" />
 				</action>
-				<action class="org.jboss.soa.esb.actions.Notifier" name="notificationAction">
-					<property name="okMethod" value="notifyOK" />
-					<property name="destinations">
-						<NotificationList type="ok">
-							<target class="NotifyConsole" />
-						</NotificationList>
-					</property>
-				</action>
 			</actions>
-
 		</service>
 	</services>
 </jbossesb>

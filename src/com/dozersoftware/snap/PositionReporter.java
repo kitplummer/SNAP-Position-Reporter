@@ -14,16 +14,13 @@ import org.jboss.soa.esb.message.Message;
 
 public class PositionReporter extends AbstractActionLifecycle {
 
-	private ConfigTree _config;
-
 	public PositionReporter(ConfigTree config) {
-		this._config = config;
 	}
 
 	public Message process(Message message) {
 		
 		try {
-			new ServiceInvoker("NormOut", "NormProcessor").deliverAsync(message);
+			new ServiceInvoker("NormOut", "SNAPNormProcessor").deliverAsync(message);
 		} catch (MessageDeliverException e) {
 			e.printStackTrace();
 		}
