@@ -100,11 +100,12 @@ public class PositionMessageComposer implements ScheduledEventMessageComposer {
 	}
 	
 	private String format(){
+		//{"POSREP": [16,"Aug 17, 2010 3:11:00 AM","31.74","-111.11"]}
 		Date date = new Date();
-		String body = "<BODY>{\"POSREP\": {\"count\":" + count + ", \"time\": ";
-		body = body + "\"" + DateFormat.getDateTimeInstance().format(date) + "\",\"lat\":";
-		body = body + "\"" + Double.toString(curLat) + "\",";
-		body = body + "\"lng\":\"" + Double.toString((curLng)) + "\"}}";
+		String body = "<BODY>{\"POSREP\":[" + count + ",";
+		body = body + "\"" + DateFormat.getDateTimeInstance().format(date) + "\",";
+		body = body + Double.toString(curLat) + ",";
+		body = body +  Double.toString((curLng)) + "]}";
 		body = body + "</BODY>";
 		
 		return body;
