@@ -1,7 +1,9 @@
 package com.dozersoftware.snap;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 import org.jboss.soa.esb.ConfigurationException;
 import org.jboss.soa.esb.actions.StoreMessageToFile;
@@ -20,13 +22,29 @@ public class PositionMessageComposer implements ScheduledEventMessageComposer {
 	private double curLat;
 	private double curLng;
 
-	private char pos;
 	private int count = 1;
 	
 	public void initialize(ConfigTree config) throws ConfigurationException {
 		System.out.println("** initialize: " + config);
-		this.handle = config.getAttribute("handle");
-		this.pos = 's';
+		String sysFile = "snap.properties";
+		InputStream sysIn = PositionMessageComposer.class.getClassLoader().getResourceAsStream(sysFile);
+		try {
+			
+			if (sysIn == null) {
+				System.out.println("SNAP: Can't Read System Props File");
+			}
+			Properties sysProps = new java.util.Properties();
+			sysProps.load(sysIn);
+			
+			this.handle = sysProps.getProperty("handle");
+			
+		} catch (Exception e) {
+
+			System.out.println("NORM ERROR: Processing Properties...");
+			this.handle = "UNK";
+			
+			
+		}
 		this.curLat = 32.30;
 		this.curLng = -110.90;
 	}
